@@ -79,7 +79,6 @@ contract Voting is Ownable{
         return proposal = proposals[_proposalId].description;
     }
 
-
     // Register a vote
     function VotingProposal(uint _proposalIdVote) public {
         require(workflowStatus == WorkflowStatus.VotingSessionStarted, "Voting session is closed.");
@@ -104,11 +103,11 @@ contract Voting is Ownable{
     function countVotes() public onlyOwner {
         require(workflowStatus == WorkflowStatus.VotingSessionEnded, "Voting session has not ended.");
         
-        uint winningProposalCount = 0;
+        uint winningVoteCount = 0;
         
-        for ( uint i = 0; i <= proposals.length; i++) {
-            if(proposals[i].voteCount > winningProposalCount) {
-                winningProposalCount = proposals[i].voteCount;
+        for ( uint i = 0; i < proposals.length; i++) {
+            if(proposals[i].voteCount > winningVoteCount) {
+                winningVoteCount = proposals[i].voteCount;
                 winningProposalId = i;
             } 
         } 
